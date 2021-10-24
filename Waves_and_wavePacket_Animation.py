@@ -44,6 +44,9 @@ for ti in range(len(times)):
 yData[:,-1,:]=yData.sum(axis=1)
 
 #creating a figure object and knum+1 axes objects. The last one will be the wave packet.
+# Broadly, we will initiate all the axis objects first. Then later we will run an update function to update each of the axis, line objects
+
+# Begin initiating with time 0 values
 fig,ax=plt.subplots(knum+1,1,sharex=True,figsize=(16,12))
 fig.suptitle('t=0')
 lines=[]
@@ -59,11 +62,12 @@ for a in range(len(karray)):
     dots.append(dot)
     ax[a].legend(loc='upper right')
 
-wpln,=ax[knum].plot(x,yData[0,-1,:],label=r'$\sum_{k=1.67\pi}^{2.33\pi}$', color='r',linewidth=3)
+wpln,=ax[knum].plot(x,yData[0,-1,:],label=r'$\sum_{k=1.67\pi}^{2.33\pi}$', color='r',linewidth=3) #wavepacket line
 lines.append(wpln)
 
 ax[knum].legend(loc='upper right')
 ax[knum].set_xlabel('X',fontsize=18)
+# End initiating
 
 def update(ti):
     fig.suptitle('t = '+str(round(times[ti],1))+'s')     
